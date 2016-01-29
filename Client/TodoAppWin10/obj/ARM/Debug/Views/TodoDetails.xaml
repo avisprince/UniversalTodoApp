@@ -1,0 +1,282 @@
+﻿<Page
+    x:Class="ToDoAppWin10.Views.TodoDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoAppWin10.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:ToDoAppWin10.Utilities.Converters"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converters:HeaderTabIndexToTextColorConverter x:Key="HeaderTabIndexToTextColorConverter" />
+        <converters:HeaderTabIndexToBorderColorConverter x:Key="HeaderTabIndexToBorderColorConverter" />
+        <converters:HeaderTabIndexToBorderThicknessConverter x:Key="HeaderTabIndexToBorderThicknessConverter" />
+        <converters:CheckBoxToVisibilityConverter x:Key="CheckBoxToVisibilityConverter" />
+        <converters:MessageSenderToDisplayConverter x:Key="MessageSenderToDisplayConverter" />
+        <converters:TextLengthToIsEnabledConverter x:Key="TextLengthToIsEnabledConverter" />
+        <converters:TextLengthToButtonColorConverter x:Key="TextLengthToButtonColorConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:ConnectionId='1' Grid.Row="0" Name="Header">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <AppBarButton x:ConnectionId='24' Icon="Back" Width="50" Height="40"                                Margin="0,0,0,0"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBlock Text="{Binding Path=CurrentTodo.Title}" VerticalAlignment="Center" FontSize="17" FontWeight="Bold" TextWrapping="WrapWholeWords" TextAlignment="Center" />
+            </Grid>
+            <Grid Grid.Column="2">
+            </Grid>
+        </Grid>
+        <Grid x:ConnectionId='2' Grid.Row="1" Name="HeaderTabs" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>            
+            <Border Grid.Column="1" Margin="10,0" Tag="0"
+                    BorderThickness="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderThicknessConverter}, ConverterParameter=0}"
+                    BorderBrush="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderColorConverter}, ConverterParameter=0}">
+                <AppBarButton x:ConnectionId='23' Icon="Bullets" Label="Items"                        
+                              Tag="0" Foreground="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToTextColorConverter}, ConverterParameter=0}" />
+            </Border>
+            <Border Grid.Column="2" Margin="10,0" Tag="1"
+                    BorderThickness="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderThicknessConverter}, ConverterParameter=1}" 
+                    BorderBrush="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderColorConverter}, ConverterParameter=1}">
+                <AppBarButton x:ConnectionId='22' Icon="Edit" Label="Details"                        
+                              Tag="1" Foreground="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToTextColorConverter}, ConverterParameter=1}" />
+            </Border>
+            <Border Grid.Column="3" Margin="10,0" Tag="2"
+                    BorderThickness="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderThicknessConverter}, ConverterParameter=2}"
+                    BorderBrush="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderColorConverter}, ConverterParameter=2}">
+                <AppBarButton x:ConnectionId='21' Icon="Message" Label="Messages"                        
+                              Tag="2" Foreground="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToTextColorConverter}, ConverterParameter=2}" />
+            </Border>
+            <Border Grid.Column="4" Margin="10,0" Tag="3"
+                    BorderThickness="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderThicknessConverter}, ConverterParameter=3}"
+                    BorderBrush="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderColorConverter}, ConverterParameter=3}">
+                <AppBarButton x:ConnectionId='20' Icon="People" Label="Editors"                        
+                              Tag="3" Foreground="{Binding SelectedIndex, ElementName=TodoDetailsPivot, Converter={StaticResource HeaderTabIndexToTextColorConverter}, ConverterParameter=3}" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Pivot x:ConnectionId='3' x:Name="TodoDetailsPivot">
+                <PivotItem Margin="0,-40,0,0"> <!-- The Items pivot --><!-- TODO: Change background color -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <ListView x:ConnectionId='18' ItemsSource="{Binding Path=CurrentTodo.Todos}" Name="TodoItemsList" ItemContainerStyle="{StaticResource ListViewNoHighlights}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <CheckBox MinWidth="20" />
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <TextBlock x:ConnectionId='19' Text="{Binding Title}" Tag="{Binding}" VerticalAlignment="Center"                      />
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                        <Grid Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Gray">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBox x:ConnectionId='17' Name="AddTodoTextBox" VerticalAlignment="Center" PlaceholderText="Add new todo..." TextWrapping="Wrap" BorderBrush="Transparent" Style="{StaticResource TextBoxNoBackgroundOnFocus}" />
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <AppBarButton x:ConnectionId='16' Icon="Add" Width="50" Height="50"                       HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                              Background="{Binding ElementName=AddTodoTextBox, Path=Text.Length, Converter={StaticResource TextLengthToButtonColorConverter}}" 
+                                              IsEnabled="{Binding ElementName=AddTodoTextBox, Path=Text.Length, Converter={StaticResource TextLengthToIsEnabledConverter}}" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,-40,0,0"> <!-- The Details pivot -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                                <StackPanel Padding="10,0">
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Title" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <TextBox x:ConnectionId='15' Text="{Binding Path=CurrentTodo.Title, Mode=OneWay}" Name="TitleTextBox" FontSize="17"                                   />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Description" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <TextBox x:ConnectionId='14' Text="{Binding Path=CurrentTodo.Description, Mode=OneWay}" Name="DescriptionTextBox" FontSize="17" TextWrapping="Wrap"                                   />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <TextBlock Text="Finish By:" FontWeight="Bold" Margin="0,0,0,5" HorizontalAlignment="Left" />
+                                            </Grid>
+                                            <Grid Grid.Column="2">
+                                                <CheckBox x:ConnectionId='13' HorizontalAlignment="Right" MinWidth="20" IsChecked="{Binding ShowFinishByDetails, Mode=OneWay}" Name="ShowDateTimePickerCheckBox" Margin="0,-4,-7,0"                                                                                             />
+                                            </Grid>
+                                        </Grid>
+                                        <StackPanel Visibility="{Binding IsChecked, ElementName=ShowDateTimePickerCheckBox, Converter={StaticResource CheckBoxToVisibilityConverter}}">
+                                            <DatePicker x:ConnectionId='11' AllowDrop="False" Date="{Binding Path=CurrentTodo.FinishDate.Date, Mode=OneWay}"                                      Name="FinishByDatePicker" HorizontalAlignment="Center" />
+                                            <TimePicker x:ConnectionId='12' AllowDrop="False" Time="{Binding Path=CurrentTodo.FinishDate.TimeOfDay, Mode=OneWay}" Name="FinishByTimePicker" HorizontalAlignment="Center" />
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Assigned To:" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <ComboBox x:ConnectionId='10' ItemsSource="{Binding Path=CurrentTodo.Editors}" 
+                                                  Name="AssignedToComboBox"
+                                                  DisplayMemberPath="UserName"
+                                                  SelectedItem="{Binding Path=CurrentTodo.AssignedTo, Mode=OneWay}"
+                                                                                              />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Last Edited By:" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=CurrentTodo.LastEditor.UserName}" FontSize="17" />
+                                            <TextBlock Text=" - " FontSize="17" />
+                                            <TextBlock Text="{Binding Path=CurrentTodo.LastEditedDate}" FontSize="17" />
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Created By:" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=CurrentTodo.Creator.UserName}" FontSize="17" />
+                                            <TextBlock Text=" - " FontSize="17" />
+                                            <TextBlock Text="{Binding Path=CurrentTodo.CreatedDate}" FontSize="17" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                        <Grid Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Gray">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="1">
+                                <AppBarButton x:ConnectionId='9' Icon="Save"                                    Name="DetailsTabSaveButton" IsEnabled="False" />
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <AppBarButton x:ConnectionId='8' Icon="Cancel"                                      Name="DetailsTabCancelButton" IsEnabled="False" />
+                            </Grid>
+                            <Grid Grid.Column="3">
+                                <AppBarButton x:ConnectionId='7' Icon="Delete"                                      Name="DetailsTabDeleteButton" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,-40,0,0"> <!-- The Messages pivot -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="10,0">
+                            <ListView ItemsSource="{Binding Path=CurrentTodo.Messages}" ItemContainerStyle="{StaticResource ListViewNoHighlightsNoTilt}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <StackPanel HorizontalAlignment="Left" Margin="0,0,60,10" Visibility="{Binding Sender, Converter={StaticResource MessageSenderToDisplayConverter}, ConverterParameter=false}">
+                                                <Polygon Points="0,0 0,10 15,10" Fill="{ThemeResource SystemAccentColor}" Margin="10,0,0,-1" />
+                                                <StackPanel Background="{ThemeResource SystemAccentColor}">
+                                                    <TextBlock Text="{Binding Text}" Margin="10" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Text="{Binding Signature}" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel HorizontalAlignment="Right" Margin="60,10,0,0" Visibility="{Binding Sender, Converter={StaticResource MessageSenderToDisplayConverter}, ConverterParameter=true}">
+                                                <StackPanel BorderBrush="Transparent" BorderThickness="0">
+                                                    <StackPanel.Background>
+                                                        <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="0.45"/>
+                                                    </StackPanel.Background>
+                                                    <TextBlock Text="{Binding Text}" Margin="10" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Text="{Binding Signature}" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                                <Polygon Points="0,0 15,0 15,10" Width="20" HorizontalAlignment="Right" Fill="{ThemeResource SystemAccentColor}" Opacity="0.45" Margin="0,0,5,0" Stroke="Transparent" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                        <Grid Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="#646464">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBox x:ConnectionId='6' Name="SendMessageTextBox" VerticalAlignment="Center" PlaceholderText="Type a message" TextWrapping="Wrap" BorderBrush="Transparent" Style="{StaticResource TextBoxNoBackgroundOnFocus}" />
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <AppBarButton x:ConnectionId='5' Icon="Send" Width="50" Height="50"                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                              Background="{Binding ElementName=SendMessageTextBox, Path=Text.Length, Converter={StaticResource TextLengthToButtonColorConverter}}" 
+                                              IsEnabled="{Binding ElementName=SendMessageTextBox, Path=Text.Length, Converter={StaticResource TextLengthToIsEnabledConverter}}" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,-40,0,0"><!-- The Editors pivot -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <ListView ItemsSource="{Binding Path=CurrentTodo.Editors}" ItemContainerStyle="{StaticResource ListViewNoHighlightsNoTilt}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10,5">
+                                            <TextBlock Text="{Binding UserName}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                        <Grid Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Gray">
+                            <AppBarButton x:ConnectionId='4' Icon="Add"                       Width="50" Height="50" HorizontalAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+            </Pivot>
+        </Grid>
+    </Grid>
+</Page>
+

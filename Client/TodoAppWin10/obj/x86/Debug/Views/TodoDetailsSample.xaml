@@ -1,0 +1,269 @@
+﻿<Page
+    x:Class="ToDoAppWin10.Views.ToDoItemDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoAppWin10"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:ToDoAppWin10.Utilities.Converters"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converters:HeaderTabIndexToTextColorConverter x:Key="HeaderTabIndexToTextColorConverter" />
+        <converters:HeaderTabIndexToBorderColorConverter x:Key="HeaderTabIndexToBorderColorConverter" />
+        <converters:HeaderTabIndexToBorderThicknessConverter x:Key="HeaderTabIndexToBorderThicknessConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:ConnectionId='1' Grid.Row="0" Name="Header" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Margin="20,0,10,0" Tag="0"
+                    BorderThickness="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderThicknessConverter}, ConverterParameter=0}"
+                    BorderBrush="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderColorConverter}, ConverterParameter=0}">
+                <StackPanel x:ConnectionId='7' Tag="0"                          >
+                    <TextBlock Text="Items" HorizontalAlignment="Center" Margin="0,20,0,10" FontSize="15" 
+                               Tag="0" Foreground="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToTextColorConverter}, ConverterParameter=0}" />
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Margin="10,0,10,0" Tag="1"
+                    BorderThickness="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderThicknessConverter}, ConverterParameter=1}" 
+                    BorderBrush="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderColorConverter}, ConverterParameter=1}">
+                <StackPanel x:ConnectionId='6' Tag="1"                          >
+                    <TextBlock Text="Details" HorizontalAlignment="Center" Margin="0,20,0,10" FontSize="15" 
+                               Tag="1" Foreground="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToTextColorConverter}, ConverterParameter=1}" />
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2" Margin="10,0,10,0" Tag="2"
+                    BorderThickness="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderThicknessConverter}, ConverterParameter=2}"
+                    BorderBrush="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderColorConverter}, ConverterParameter=2}">
+                <StackPanel x:ConnectionId='5' Tag="2"                          >
+                    <TextBlock Text="Messages" HorizontalAlignment="Center" Margin="0,20,0,10" FontSize="15" 
+                               Tag="2" Foreground="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToTextColorConverter}, ConverterParameter=2}" />
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="3" Margin="10,0,20,0" Tag="3"
+                    BorderThickness="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderThicknessConverter}, ConverterParameter=3}"
+                    BorderBrush="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToBorderColorConverter}, ConverterParameter=3}">
+                <StackPanel x:ConnectionId='4' Tag="3"                          >
+                    <TextBlock Text="Editors" HorizontalAlignment="Center" Margin="0,20,0,10" FontSize="15" 
+                               Tag="3" Foreground="{Binding SelectedIndex, ElementName=ToDoListDetailsPivot, Converter={StaticResource HeaderTabIndexToTextColorConverter}, ConverterParameter=3}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" Margin="12,0,12,10">
+            <Pivot x:ConnectionId='2' Title="ToDoList Name here" x:Name="ToDoDetailsSamplePivot">
+                <PivotItem Margin="0,-47,0,0">
+                    <Grid>
+                        <ListView ItemContainerStyle="{StaticResource ListViewNoHighlights}">
+                            <ListViewItem x:ConnectionId='3' Name="todoListItem" Background="#323232" BorderBrush="Black" BorderThickness="0,0,0,1">
+                                <StackPanel Orientation="Horizontal" Width="{Binding ActualWidth, ElementName=todoListItem}">
+                                    <CheckBox MinWidth="20" />
+                                    <TextBlock Text="Item 1" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalContentAlignment="Stretch" Background="#252525" BorderBrush="Black" BorderThickness="0,0,0,1">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox MinWidth="20" />
+                                    <TextBlock Text="Item 2" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalContentAlignment="Stretch">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <CheckBox MinWidth="20" />
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <TextBlock Text="Item 3" VerticalAlignment="Center" />
+                                    </Grid>
+                                </Grid>
+                            </ListViewItem>
+                        </ListView>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,-47,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <ScrollViewer>
+                                <StackPanel Padding="10,0">
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Title" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <TextBox Text="ToDoItem Name Here" FontSize="17" />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Description" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <TextBox Text="ToDoItem Description Here. We can make this long to see what happens on multiple lines. I wonder if we make this long enough if it will enable page scrolling or will everything be inaccessable" FontSize="17" TextWrapping="Wrap" />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Finish By:" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <DatePicker AllowDrop="False" />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Assigned To:" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <ComboBox Width="200">
+                                            <ComboBoxItem Tag="Owner 1"/>
+                                            <ComboBoxItem Tag="Owner 2"/>
+                                            <ComboBoxItem Tag="Owner 3"/>
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Created By:" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <TextBlock Text="Creator Here" FontSize="17" />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Last Edited By:" FontWeight="Bold" Margin="0,0,0,5" />
+                                        <TextBlock Text="Previous Editor Here" FontSize="17" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                        <Grid Grid.Row="1" HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <AppBarButton Icon="Save" Label="Save" />
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <AppBarButton Icon="Cancel" Label="Cancel" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,-47,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="10,0">
+                            <ListView ItemContainerStyle="{StaticResource ListViewNoHighlightsNoTilt}">
+                                <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                                            <StackPanel>
+                                                <Polygon Points="0,0 0,14 20,14" Fill="Green" Margin="10,0,0,-1"/>
+                                                <StackPanel Background="Green">
+                                                    <TextBlock Text="Lots and lots of text to see what it is like when the text wraps to multiple lines" Margin="10,10" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Text="User name Date and time" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                                            <StackPanel>
+                                                <Polygon Points="0,0 0,14 20,14" Fill="Green" Margin="10,0,0,-1"/>
+                                                <StackPanel Background="Green">
+                                                    <TextBlock Text="Lots and lots of text to see what it is like when the text wraps to multiple lines" Margin="10,10" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Text="User name Date and time" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </ListViewItem>
+                                <ListViewItem HorizontalAlignment="Left">
+                                    <StackPanel>
+                                        <Polygon Points="0,0 0,15 20,15" Fill="Green" Margin="10,0,0,-2"/>
+                                        <StackPanel Background="Green">
+                                            <TextBlock Text="A short message" Margin="10,10" TextWrapping="WrapWholeWords"/>
+                                            <TextBlock Text="User name Date and time" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem HorizontalAlignment="Right" Margin="0,10,0,0">
+                                    <StackPanel Width="250">
+                                        <StackPanel BorderThickness="0" BorderBrush="Transparent">
+                                            <StackPanel.Background>
+                                                <SolidColorBrush Color="Green" Opacity="0.45"/>
+                                            </StackPanel.Background>
+                                            <TextBlock Text="A response from the current user" Margin="10,10" TextWrapping="WrapWholeWords"/>
+                                            <TextBlock Text="User name Date and time" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                        </StackPanel>
+                                        <Polygon Points="0,0 20,0 20,13" Width="20" HorizontalAlignment="Right" Fill="Green" Margin="0,0,10,0" Opacity="0.45" Stroke="Transparent" />
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem HorizontalAlignment="Left">
+                                    <StackPanel Margin="0,0,40,0">
+                                        <Polygon Points="0,0 0,15 20,15" Fill="Green" Margin="10,0,0,-2"/>
+                                        <StackPanel Background="Green">
+                                            <TextBlock Text="Lots and lots of text to see what it is like when the text wraps to multiple lines" Margin="10,10" TextWrapping="WrapWholeWords"/>
+                                            <TextBlock Text="User name Date and time" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem HorizontalAlignment="Left">
+                                    <StackPanel Width="250">
+                                        <Polygon Points="0,0 0,15 20,15" Fill="Green" Margin="10,0,0,-2"/>
+                                        <StackPanel Background="Green">
+                                            <TextBlock Text="A short message" Margin="10,10" TextWrapping="WrapWholeWords"/>
+                                            <TextBlock Text="User name Date and time" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem HorizontalAlignment="Right" Margin="0,10,0,0">
+                                    <StackPanel Width="250">
+                                        <StackPanel Background="Green">
+                                            <TextBlock Text="A response from the current user" Margin="10,10" TextWrapping="WrapWholeWords"/>
+                                            <TextBlock Text="User name Date and time" Margin="10,0,10,5" HorizontalAlignment="Right"/>
+                                        </StackPanel>
+                                        <Polygon Points="0,0 20,0 20,15" Width="20" HorizontalAlignment="Right" Fill="Green" Margin="0,-2,10,0"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                            </ListView>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBox VerticalAlignment="Center" PlaceholderText="Type a message" TextWrapping="Wrap" BorderBrush="Black" />
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Border Width="50" Height="50" Background="Green" HorizontalAlignment="Right">
+                                    <Image />
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,-47,0,0">
+                    <Grid>
+                        <TextBlock Text="This is the Editors pivot" />
+                    </Grid>
+                </PivotItem>
+            </Pivot>
+        </Grid>
+    </Grid>
+</Page>
+
