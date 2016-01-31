@@ -179,14 +179,15 @@ namespace ToDoAppWin10.Views
             var currentTodo = this.todoDetails.CurrentTodo;
             var parent = currentTodo.Parent;
 
+            DataManager.DeleteTodo(currentTodo);
+            this.todoDetails.DeleteTodo();
+
             if (parent != null)
             {
-                //parent.Todos.Remove(currentTodo);
                 this.NavigateToTodo(parent);
             }
             else
             {
-                //CurrentUser.Instance.Todos.Remove(currentTodo);
                 Frame.GoBack();
             }
         }

@@ -19,5 +19,16 @@ namespace ToDoAppWin10.Models
 
             // load users
         }
+
+        public static void DeleteTodo(TodoItem todo)
+        {
+            var children = Todos.Where(t => t.Parent != null && t.Parent.Id == todo.Id).ToList();
+            foreach (var child in children)
+            {
+                DeleteTodo(child);
+            }
+
+            Todos.Remove(todo);
+        }
     }
 }

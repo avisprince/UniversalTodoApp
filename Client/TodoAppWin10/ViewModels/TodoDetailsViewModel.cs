@@ -58,5 +58,10 @@ namespace ToDoAppWin10.ViewModels
         {
             await App.MobileService.GetTable<TodoItem>().UpdateAsync(this.CurrentTodo);
         }
+
+        public async void DeleteTodo()
+        {
+            await App.MobileService.GetTable<TodoItem>().DeleteAsync(this.CurrentTodo);
+        }
     }
 }

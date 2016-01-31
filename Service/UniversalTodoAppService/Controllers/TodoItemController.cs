@@ -72,39 +72,32 @@ namespace UniversalTodoAppService.Controllers
         }
 
         // DELETE tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task DeleteTodoItem(string id)
+        public async Task DeleteTodoItem(string id)
         {
-            return DeleteAsync(id);
+            var todo = this.context.TodoItems.First(t => t.Id == id);
+            await DeleteTodoItemHelper(todo);
+
+            return;
         }
 
-        //private TodoItemDTO ConvertToDTO(TodoItem todo)
-        //{
-        //    return new TodoItemDTO
-        //    {
-        //        Id = todo.Id,
-        //        Title = todo.Title,
-        //        Description = todo.Description,
-        //        CreatedAt = todo.CreatedAt,
-        //        UpdatedAt = todo.UpdatedAt,
-        //        FinishDate = todo.FinishDate,
-        //        Parent = todo.Parent != null ? ConvertToDTO(todo.Parent) : null,
-        //        Messages = todo.Messages.Select(m => ,
-        //    };
-        //}
+        private async Task DeleteTodoItemHelper(TodoItem todo)
+        {
+            // Delete children
+            var children = this.context.TodoItems.Where(t => t.ParentId == todo.Id).ToList();
+            foreach (var child in children)
+            {
+                await DeleteTodoItemHelper(child);
+            }
 
-        //private TodoItem ConvertFromDTO(TodoItemDTO todo)
-        //{
-        //    return new TodoItem
-        //    {
-        //        Id = todo.Id,
-        //        Title = todo.Title,
-        //        Description = todo.Description,
-        //        CreatedAt = todo.CreatedAt,
-        //        UpdatedAt = todo.UpdatedAt,
-        //        FinishDate = todo.FinishDate,
-        //        ParentId = todo.Parent != null ? todo.Parent.Id : null,
-        //    };
-        //}
+            // Delete messages
+            var messages = this.context.Messages.Where(m => m.TodoItemId == todo.Id).ToList();
+            this.context.Messages.RemoveRange(messages);
+
+            // Delete todo
+            this.context.TodoItems.Remove(todo);
+
+            await this.context.SaveChangesAsync();
+        }
 
         //var user = this.User as ServiceUser;
         //var creds = (await user.GetIdentitiesAsync()).OfType<FacebookCredentials>().FirstOrDefault();
