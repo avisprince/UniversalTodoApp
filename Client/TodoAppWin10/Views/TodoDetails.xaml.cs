@@ -114,7 +114,7 @@ namespace ToDoAppWin10.Views
             var todoIsEdited =
                 this.TitleTextBox.Text != currentTodo.Title ||
                 this.DescriptionTextBox.Text != currentTodo.Description ||
-                ((User)this.AssignedToComboBox.SelectedItem) != currentTodo.AssignedTo;
+                ((Editor)this.AssignedToComboBox.SelectedItem) != currentTodo.AssignedTo;
             
             var dateIsChanged =
                 this.ShowDateTimePickerCheckBox.IsChecked != this.todoDetails.ShowFinishByDetails ||
@@ -149,7 +149,7 @@ namespace ToDoAppWin10.Views
                 currentTodo.FinishDate = new DateTime();
             }
 
-            currentTodo.AssignedTo = this.AssignedToComboBox.SelectedItem as User;
+            currentTodo.AssignedTo = this.AssignedToComboBox.SelectedItem as Editor;
 
             currentTodo.UpdatedAt = DateTime.Now;
             currentTodo.LastEditor = CurrentUser.Instance;

@@ -2,15 +2,12 @@
 
 namespace ToDoAppWin10.Models
 {
-    public class CurrentUser : User
+    public class CurrentUser : Editor
     {
         private static CurrentUser instance;
-        
-        private ObservableCollection<TodoItem> todos;
 
         private CurrentUser()
         {
-            this.UserName = "Avi";
         }
 
         public static CurrentUser Instance

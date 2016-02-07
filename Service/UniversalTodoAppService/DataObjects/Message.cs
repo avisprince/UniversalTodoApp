@@ -6,7 +6,8 @@ namespace UniversalTodoAppService.DataObjects
     {
         public string Text { get; set; }
 
-        //public string SenderId { get; set; }
+        public string SenderId { get; set; }
+        public virtual Editor Sender { get; set; }
         
         public string TodoItemId { get; set; }
         public virtual TodoItem Todo { get; set; }

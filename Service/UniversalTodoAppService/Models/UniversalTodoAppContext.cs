@@ -25,6 +25,7 @@ namespace UniversalTodoAppService.Models
         {
         }
 
+        public DbSet<Editor> Editors { get; set; }
         public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet<Message> Messages { get; set; }
 
@@ -40,6 +41,8 @@ namespace UniversalTodoAppService.Models
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
+
+        public System.Data.Entity.DbSet<UniversalTodoAppService.DataObjects.EditorTodoItem> EditorTodoItems { get; set; }
     }
 
 }

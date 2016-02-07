@@ -20,13 +20,17 @@
         </Grid.RowDefinitions>
         <Grid x:ConnectionId='1' Grid.Row="0" Name="Header">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Margin="25,0,0,0">
-                <TextBlock Text="Fix Me" VerticalAlignment="Center" FontSize="17" FontWeight="Bold" TextWrapping="WrapWholeWords" />
+            <Grid Grid.Column="0">
+                <Image Source="{Binding Path=CurrUser.PictureUrl}" Width="50" Height="50"/>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="10,0,0,0">
+                <TextBlock Text="{Binding Path=CurrUser.UserName}" VerticalAlignment="Center" FontSize="17" FontWeight="Bold" TextWrapping="WrapWholeWords" />
+            </Grid>
+            <Grid Grid.Column="2">
                 <AppBarButton x:ConnectionId='5' Icon="Contact" Width="50" Height="50"                            />
             </Grid>
         </Grid>

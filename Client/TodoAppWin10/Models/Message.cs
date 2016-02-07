@@ -17,7 +17,7 @@ namespace ToDoAppWin10.Models
         public string Id { get; set; }
         public string Text { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
-        public User Sender { get; set; }
+        public Editor Sender { get; set; }
         public string TodoItemId { get; set; }
 
         public string Signature

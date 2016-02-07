@@ -10,19 +10,19 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>1534bb97-7c17-4c96-922f-2d8f63d26a07</PackageIdentityName>
     <IntermediateOutputPath>C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\obj\x86\Debug\</IntermediateOutputPath>
-    <RegisteredManifestChecksum>B16DE102E9DB1018633571F77565764531C2E5AA598BB4AA5E830E109639428E</RegisteredManifestChecksum>
-    <RegisteredPackageMoniker>1534bb97-7c17-4c96-922f-2d8f63d26a07_1.0.0.0_x86__xk6fkpaftk5nr</RegisteredPackageMoniker>
-    <RegisteredUserModeAppID>1534bb97-7c17-4c96-922f-2d8f63d26a07_xk6fkpaftk5nr!App</RegisteredUserModeAppID>
-    <RegisteredPackageID>1534bb97-7c17-4c96-922f-2d8f63d26a07</RegisteredPackageID>
-    <RegisteredPackagePublisher>CN=aprince</RegisteredPackagePublisher>
-    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <RegisteredManifestChecksum>0F33A73B9BC8B85D795660072510C5E6436DF3AC9EEF414F8052D3F1EA14C3CD</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>38142AviPrince.UniversalTodoApp_1.1.0.0_x86__4nj1vmdrhf0bp</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>38142AviPrince.UniversalTodoApp_4nj1vmdrhf0bp!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>38142AviPrince.UniversalTodoApp</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=6D14B8D7-C91C-4D98-A453-FDF7D55F9107</RegisteredPackagePublisher>
+    <RegisteredVersion>1.1.0.0</RegisteredVersion>
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
     <AppXManifest Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-01-31T00:47:44.779</Modified>
+      <Modified>2016-02-07T08:22:40.103</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +70,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\entrypoint\ToDoAppWin10.exe">
       <PackagePath>entrypoint\ToDoAppWin10.exe</PackagePath>
-      <Modified>2016-01-31T00:47:40.661</Modified>
+      <Modified>2016-02-07T08:22:33.855</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\Facebook.dll">
       <PackagePath>Facebook.dll</PackagePath>
@@ -118,7 +118,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-01-31T00:47:42.904</Modified>
+      <Modified>2016-02-07T08:22:37.102</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\System.AppContext.dll">
       <PackagePath>System.AppContext.dll</PackagePath>
@@ -530,11 +530,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\ToDoAppWin10.exe">
       <PackagePath>ToDoAppWin10.exe</PackagePath>
-      <Modified>2016-01-31T00:47:44.771</Modified>
+      <Modified>2016-02-07T08:22:40.075</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\ToDoAppWin10.xr.xml">
       <PackagePath>ToDoAppWin10.xr.xml</PackagePath>
-      <Modified>2016-01-29T08:56:46.577</Modified>
+      <Modified>2016-02-07T04:58:09.565</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\WinMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>

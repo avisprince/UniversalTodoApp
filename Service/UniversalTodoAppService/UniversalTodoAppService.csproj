@@ -193,14 +193,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EditorController.cs" />
+    <Compile Include="Controllers\EditorTodoItemController.cs" />
+    <Compile Include="Controllers\FacebookAuthHelper.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="DataObjects\DTOConverter.cs" />
+    <Compile Include="DataObjects\EditorDTO.cs" />
+    <Compile Include="DataObjects\EditorTodoItem.cs" />
     <Compile Include="DataObjects\Message.cs" />
     <Compile Include="DataObjects\MessageDTO.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="DataObjects\TodoItemDTO.cs" />
-    <Compile Include="DataObjects\UserInfo.cs" />
+    <Compile Include="DataObjects\Editor.cs" />
     <Compile Include="Models\UniversalTodoAppContext.cs" />
     <Compile Include="ScheduledJobs\SampleJob.cs" />
     <Compile Include="Global.asax.cs">

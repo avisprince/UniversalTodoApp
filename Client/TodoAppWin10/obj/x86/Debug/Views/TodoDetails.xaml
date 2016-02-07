@@ -263,7 +263,8 @@
                             <ListView ItemsSource="{Binding Path=CurrentTodo.Editors}" ItemContainerStyle="{StaticResource ListViewNoHighlightsNoTilt}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Margin="10,5">
+                                        <StackPanel Margin="10,5" Orientation="Horizontal">
+                                            <Image Source="{Binding PictureUrl}" Height="50" Width="50"/>
                                             <TextBlock Text="{Binding UserName}" />
                                         </StackPanel>
                                     </DataTemplate>

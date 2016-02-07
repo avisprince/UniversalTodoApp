@@ -22,13 +22,11 @@ namespace ToDoAppWin10.Models
                 user = await App.MobileService.LoginAsync(provider);
 
                 // Create and store the user credentials.
-                var credential = new PasswordCredential(provider, user.UserId, user.MobileServiceAuthenticationToken);
-
-                vault.Add(credential);
+                vault.Add(new PasswordCredential(provider, user.UserId, user.MobileServiceAuthenticationToken));
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
 

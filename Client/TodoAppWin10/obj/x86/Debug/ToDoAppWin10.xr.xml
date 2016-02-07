@@ -8,11 +8,13 @@
     <RootPropertyPathName Name="Length" />
     <RootPropertyPathName Name="Todos" />
     <RootPropertyPathName Name="Title" />
+    <RootPropertyPathName Name="CurrUser" />
+    <RootPropertyPathName Name="UserName" />
+    <RootPropertyPathName Name="PictureUrl" />
     <RootPropertyPathName Name="ActualWidth" />
     <RootPropertyPathName Name="SelectedIndex" />
     <RootPropertyPathName Name="CurrentTodo" />
     <RootPropertyPathName Name="Editors" />
-    <RootPropertyPathName Name="UserName" />
     <RootPropertyPathName Name="Messages" />
     <RootPropertyPathName Name="Sender" />
     <RootPropertyPathName Name="Signature" />
@@ -310,6 +312,11 @@
       <RootEvent Name="Checked" />
       <RootEvent Name="Unchecked" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="Source" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+    </RootType>
     <RootType FullName="ToDoAppWin10.Views.SelectToDo" />
     <RootType FullName="ToDoAppWin10.Utilities.Converters.HeaderTabIndexToTextColorConverter" />
     <RootType FullName="ToDoAppWin10.Utilities.Converters.HeaderTabIndexToBorderColorConverter" />
@@ -322,7 +329,6 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Image" />
     <RootType FullName="Windows.UI.Xaml.Shapes.Polygon">
       <RootProperty Name="Points" />
       <RootProperty Name="Width" />

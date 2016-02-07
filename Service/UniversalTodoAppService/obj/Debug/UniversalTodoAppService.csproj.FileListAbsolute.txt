@@ -265,6 +265,6 @@ C:\Users\Avi\git\UniversalTodoApp\Service\UniversalTodoAppService\bin\ko\System.
 C:\Users\Avi\git\UniversalTodoApp\Service\UniversalTodoAppService\bin\ru\System.Spatial.resources.dll
 C:\Users\Avi\git\UniversalTodoApp\Service\UniversalTodoAppService\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\Avi\git\UniversalTodoApp\Service\UniversalTodoAppService\bin\zh-Hant\System.Spatial.resources.dll
-C:\Users\Avi\git\UniversalTodoApp\Service\UniversalTodoAppService\obj\Debug\UniversalTodoAppService.csprojResolveAssemblyReference.cache
 C:\Users\Avi\git\UniversalTodoApp\Service\UniversalTodoAppService\obj\Debug\UniversalTodoAppService.dll
 C:\Users\Avi\git\UniversalTodoApp\Service\UniversalTodoAppService\obj\Debug\UniversalTodoAppService.pdb
+C:\Users\Avi\git\UniversalTodoApp\Service\UniversalTodoAppService\obj\Debug\UniversalTodoAppService.csprojResolveAssemblyReference.cache

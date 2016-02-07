@@ -12,7 +12,7 @@ namespace UniversalTodoAppService.DataObjects
         {
             this.Todos = new Collection<TodoItem>();
             this.Messages = new Collection<Message>();
-            //this.Editors = new Collection<UserInfo>();
+            this.Editors = new Collection<Editor>();
         }
 
         public string Title { get; set; }
@@ -31,10 +31,8 @@ namespace UniversalTodoAppService.DataObjects
 
         //public UserInfo AssignedTo { get; set; }
 
-        //public virtual ICollection<UserInfo> Editors { get; set; }
-
         public virtual ICollection<TodoItem> Todos { get; set; }
-
         public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Editor> Editors { get; set; }
     }
 }

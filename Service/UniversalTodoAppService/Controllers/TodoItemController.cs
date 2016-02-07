@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net.Http;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
-using Facebook;
 using Microsoft.WindowsAzure.Mobile.Service;
 using Microsoft.WindowsAzure.Mobile.Service.Security;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using UniversalTodoAppService.DataObjects;
 using UniversalTodoAppService.Models;
 
@@ -31,22 +26,45 @@ namespace UniversalTodoAppService.Controllers
         }
 
         // GET tables/TodoItem
-        public IEnumerable<TodoItemDTO> GetAllTodoItems()
+        public async Task<IEnumerable<TodoItemDTO>> GetAllTodoItems()
         {
-            var todos = Query().Include(t => t.Parent).Include(t => t.Messages).ToList();
-            return todos.Select(t => DTOConverter.ConvertToDTO(t));
+            var fbAccessToken = await FacebookAuthHelper.GetFacebookAccessToken((ServiceUser)this.User);
+            var facebookId = FacebookAuthHelper.GetCurrentUserFacebookId((ServiceUser)this.User, fbAccessToken);
+
+            var currentEditor = this.context.Editors.Where(e => e.FacebookId == facebookId).FirstOrDefault();
+
+            var todos = this.context.TodoItems//.Where(t => t.Editors.Contains(currentEditor))// && t.Parent == null)
+                .Include(t => t.Messages).ToList();
+
+            foreach (var todo in todos)
+            {
+                var editorIds = this.context.EditorTodoItems.Where(e => e.TodoItemId == todo.Id).Select(e => e.EditorId).ToList();
+                foreach (var eId in editorIds)
+                {
+                    var editor = this.context.Editors.Where(e => e.Id == eId).First();
+                    todo.Editors.Add(editor);
+                }
+            }
+
+            return todos.Select(t => DTOConverter.ConvertToDTO(t, fbAccessToken));
         }
 
         // GET tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public IEnumerable<TodoItemDTO> GetTodoItem(string id)
+        public async Task<IEnumerable<TodoItemDTO>> GetTodoItem(string id)
         {
-            var todos = Query().Where(t => t.Parent.Id == id).Include(t => t.Messages).ToList();
-            return todos.Select(t => DTOConverter.ConvertToDTO(t));
+            var fbAccessToken = await FacebookAuthHelper.GetFacebookAccessToken((ServiceUser)this.User);
+            
+            var todos = this.context.TodoItems.Where(t => t.ParentId == id)
+                .Include(t => t.Messages)
+                .Include(t => t.Editors).ToList();
+            return todos.Select(t => DTOConverter.ConvertToDTO(t, fbAccessToken));
         }
 
         // PATCH tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
         public async Task<TodoItemDTO> PatchTodoItem(string id, Delta<TodoItemDTO> patch)
         {
+            var fbAccessToken = await FacebookAuthHelper.GetFacebookAccessToken((ServiceUser)this.User);
+
             var patchedTodo = patch.GetEntity();
             var existingTodo = this.context.TodoItems.First(t => t.Id == id);
 
@@ -55,9 +73,17 @@ namespace UniversalTodoAppService.Controllers
             existingTodo.FinishDate = patchedTodo.FinishDate;
             existingTodo.Complete = patchedTodo.Complete;
 
+            var existingEditors = this.context.EditorTodoItems.Where(e => e.TodoItemId == existingTodo.Id).Select(e => e.Id).ToList();
+            var patchEditors = patchedTodo.Editors.Select(e => e.Id).ToList();
+            var newEditors = existingEditors.Except(patchEditors).Union(patchEditors.Except(existingEditors));
+            foreach(var editorId in newEditors)
+            {
+                this.context.EditorTodoItems.Add(new EditorTodoItem() { EditorId = editorId, TodoItemId = existingTodo.Id });
+            }
+
             await this.context.SaveChangesAsync();
 
-            return DTOConverter.ConvertToDTO(existingTodo);
+            return DTOConverter.ConvertToDTO(existingTodo, fbAccessToken);
         }
 
         // POST tables/TodoItem
@@ -67,6 +93,9 @@ namespace UniversalTodoAppService.Controllers
             item.Id = current.Id;
             item.CreatedAt = current.CreatedAt;
             item.UpdatedAt = current.UpdatedAt;
+            
+            this.context.EditorTodoItems.Add(new EditorTodoItem() { Id = Guid.NewGuid().ToString(), EditorId = item.Editors.First().Id, TodoItemId = current.Id });
+            await this.context.SaveChangesAsync();
 
             return CreatedAtRoute("Tables", item, item);
         }
@@ -93,33 +122,14 @@ namespace UniversalTodoAppService.Controllers
             var messages = this.context.Messages.Where(m => m.TodoItemId == todo.Id).ToList();
             this.context.Messages.RemoveRange(messages);
 
+            // Delete Editor references
+            var editors = this.context.EditorTodoItems.Where(e => e.TodoItemId == todo.Id).ToList();
+            this.context.EditorTodoItems.RemoveRange(editors);
+
             // Delete todo
             this.context.TodoItems.Remove(todo);
 
             await this.context.SaveChangesAsync();
         }
-
-        //var user = this.User as ServiceUser;
-        //var creds = (await user.GetIdentitiesAsync()).OfType<FacebookCredentials>().FirstOrDefault();
-        //string accessToken = creds.AccessToken;
-
-        //var user = this.User as ServiceUser;
-        //return Query().Where(t => t.Editors.Contains(user.Id)).Include(t => t.Messages);
-
-        //var identities = await user.GetIdentitiesAsync();
-        //var result = new JObject();
-        //var fb = identities.OfType<FacebookCredentials>().FirstOrDefault();
-        //if (fb != null)
-        //{
-        //    var accessToken = fb.AccessToken;
-
-        //    var client = new FacebookClient(accessToken);
-        //    return client.Get("/me?fields=id,name,picture").ToString();
-        //    //return JsonConvert.DeserializeObject<UserInfo>(userInfo);
-
-        //    //result.Add("facebook", await GetProviderInfo("https://graph.facebook.com/me?access_token=" + accessToken));
-        //}
-
-        //return null;
     }
 }

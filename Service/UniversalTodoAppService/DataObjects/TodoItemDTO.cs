@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.WindowsAzure.Mobile.Service;
 
 namespace UniversalTodoAppService.DataObjects
 {
@@ -28,7 +27,7 @@ namespace UniversalTodoAppService.DataObjects
 
         //public ICollection<TodoItemDTO> Todos { get; set; }
 
-        //public ICollection<UserInfo> Editors { get; set; }
+        public ICollection<EditorDTO> Editors { get; set; }
 
         public ICollection<MessageDTO> Messages { get; set; }
     }
