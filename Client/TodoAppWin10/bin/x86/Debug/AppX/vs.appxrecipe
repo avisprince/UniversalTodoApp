@@ -22,7 +22,7 @@
     <AppXManifest Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-02-07T08:22:40.103</Modified>
+      <Modified>2016-02-08T07:01:43.499</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +70,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\entrypoint\ToDoAppWin10.exe">
       <PackagePath>entrypoint\ToDoAppWin10.exe</PackagePath>
-      <Modified>2016-02-07T08:22:33.855</Modified>
+      <Modified>2016-02-08T07:01:38.719</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\Facebook.dll">
       <PackagePath>Facebook.dll</PackagePath>
@@ -118,7 +118,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-02-07T08:22:37.102</Modified>
+      <Modified>2016-02-08T07:01:41.580</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\System.AppContext.dll">
       <PackagePath>System.AppContext.dll</PackagePath>
@@ -530,11 +530,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\ToDoAppWin10.exe">
       <PackagePath>ToDoAppWin10.exe</PackagePath>
-      <Modified>2016-02-07T08:22:40.075</Modified>
+      <Modified>2016-02-08T07:01:43.475</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\ToDoAppWin10.xr.xml">
       <PackagePath>ToDoAppWin10.xr.xml</PackagePath>
-      <Modified>2016-02-07T04:58:09.565</Modified>
+      <Modified>2016-02-08T07:01:37.900</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Avi\git\UniversalTodoApp\Client\TodoAppWin10\bin\x86\Debug\Core\WinMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>

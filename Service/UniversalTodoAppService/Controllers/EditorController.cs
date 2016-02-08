@@ -21,8 +21,11 @@ namespace UniversalTodoAppService.Controllers
         }
 
         // GET tables/Editor
-        public IQueryable<Editor> GetAllEditor()
+        public async Task<IQueryable<Editor>> GetAllEditor()
         {
+            var fbAccessToken = await FacebookAuthHelper.GetFacebookAccessToken((ServiceUser)this.User);
+            var x = FacebookAuthHelper.GetCurrentUserFacebookFriends((ServiceUser)this.User, fbAccessToken);
+
             return Query();
         }
 

@@ -12,7 +12,7 @@ namespace ToDoAppWin10.Models
         private DateTimeOffset updatedAt;
         private DateTimeOffset finishDate;
         private TodoItem parent;
-        private Editor creator;
+        private Editor createdBy;
         private Editor lastEditor; 
         private Editor assignedTo;
 
@@ -25,7 +25,7 @@ namespace ToDoAppWin10.Models
             this.CreatedAt = DateTime.Now;
             this.UpdatedAt = DateTime.Now;
             this.Parent = parent;
-            this.Creator = CurrentUser.Instance;
+            this.CreatedBy = CurrentUser.Instance;
             this.LastEditor = CurrentUser.Instance;
 
             //this.Todos = new ObservableCollection<TodoItem>();
@@ -151,18 +151,18 @@ namespace ToDoAppWin10.Models
             }
         }
 
-        public Editor Creator
+        public Editor CreatedBy
         {
             get
             {
-                return this.creator;
+                return this.createdBy;
             }
             set
             {
-                if (this.creator != value)
+                if (this.createdBy != value)
                 {
-                    this.creator = value;
-                    this.NotifyPropertyChanged("Creator");
+                    this.createdBy = value;
+                    this.NotifyPropertyChanged("CreatedBy");
                 }
             }
         }

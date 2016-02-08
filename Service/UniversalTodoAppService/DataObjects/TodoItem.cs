@@ -23,13 +23,21 @@ namespace UniversalTodoAppService.DataObjects
 
         public DateTimeOffset? FinishDate { get; set; }
 
-        //public UserInfo LastEditor { get; set; }
+        public string LastEditorId { get; set; }
+        [ForeignKey("LastEditorId")]
+        public Editor LastEditor { get; set; }
 
         public string ParentId { get; set; }
         [ForeignKey("ParentId")]
         public TodoItem Parent { get; set; }
 
-        //public UserInfo AssignedTo { get; set; }
+        public string AssignedToId { get; set; }
+        [ForeignKey("AssignedToId")]
+        public Editor AssignedTo { get; set; }
+
+        public string CreatedById { get; set; }
+        [ForeignKey("CreatedById")]
+        public Editor CreatedBy { get; set; }
 
         public virtual ICollection<TodoItem> Todos { get; set; }
         public virtual ICollection<Message> Messages { get; set; }

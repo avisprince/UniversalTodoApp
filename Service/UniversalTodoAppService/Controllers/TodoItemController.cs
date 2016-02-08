@@ -33,17 +33,30 @@ namespace UniversalTodoAppService.Controllers
 
             var currentEditor = this.context.Editors.Where(e => e.FacebookId == facebookId).FirstOrDefault();
 
-            var todos = this.context.TodoItems//.Where(t => t.Editors.Contains(currentEditor))// && t.Parent == null)
-                .Include(t => t.Messages).ToList();
+            var todoIds = this.context.EditorTodoItems.Where(e => e.EditorId == currentEditor.Id).Select(e => e.TodoItemId).ToList();
 
-            foreach (var todo in todos)
+            var todos = new List<TodoItem>();
+            foreach (var todoId in todoIds)
             {
-                var editorIds = this.context.EditorTodoItems.Where(e => e.TodoItemId == todo.Id).Select(e => e.EditorId).ToList();
+                // Get the todo
+                var todo = this.context.TodoItems.Where(t => t.Id == todoId)// && t.Parent == null)
+                    .Include(t => t.Messages)
+                    .Include(t => t.LastEditor)
+                    .Include(t => t.AssignedTo)
+                    .Include(t => t.CreatedBy).First();
+
+                // Get the editor ids of the todo
+                var editorIds = this.context.EditorTodoItems.Where(e => e.TodoItemId == todoId).Select(e => e.EditorId).ToList();
+
+                // Convert the editor ids to Editors and add to todo
                 foreach (var eId in editorIds)
                 {
                     var editor = this.context.Editors.Where(e => e.Id == eId).First();
                     todo.Editors.Add(editor);
                 }
+
+                // Add to the list of todos
+                todos.Add(todo);
             }
 
             return todos.Select(t => DTOConverter.ConvertToDTO(t, fbAccessToken));

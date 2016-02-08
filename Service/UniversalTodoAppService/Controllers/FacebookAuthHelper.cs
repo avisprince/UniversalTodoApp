@@ -9,7 +9,7 @@ namespace UniversalTodoAppService.Controllers
     {
         public static async Task<string> GetFacebookAccessToken(ServiceUser user)
         {
-            return "CAACEdEose0cBAPstNHajP3ZAd1hAi6iPFhTUAF83Or9lpUtKm3NpbGNpjTZCZBCjc0N1a9Qzbwau67IS8NEqECts6ftVpuZBSdbWJoD3zjZCoYVI6jTFhvbrZAZBZC8gUj7mpaVgJZCoQOIiCXxp5bNPJSlpiRBhZAwuFYLJEnMJ8632rpVcFQAHvq5nGzHy3bXButbOO9zqHkYHzkR2XE7Ige";
+            return "CAAGztpWeEdMBAOZAwXo32eH2sNmc97gKaiX6UENcwORH99bP4QgjhREU6H0ZAFyt9D6aPyTnhgw9b1QdN2q3rlmeCESPqqNoHxFYGyREsJRIoRTyQxG8IRH2aXPoD3OxPZAsp2MNyldQvxPVTKQ1D21fPvt6ZBwVO0ZAx4nFrWQybvH1UvFpWc1Jkle436FfdqGdJIpZCxRwZDZD";
 
             //var fb = (await user.GetIdentitiesAsync()).OfType<FacebookCredentials>().FirstOrDefault();
             //return fb.AccessToken;
@@ -21,6 +21,14 @@ namespace UniversalTodoAppService.Controllers
 
             dynamic userInfo = fbClient.Get("me");
             return (string)userInfo.id;
+        }
+
+        public static string GetCurrentUserFacebookFriends(ServiceUser user, string fbAccessToken)
+        {
+            var fbClient = new FacebookClient(fbAccessToken);
+
+            dynamic userInfo = fbClient.Get("me/friends");
+            return string.Empty;
         }
     }
 }

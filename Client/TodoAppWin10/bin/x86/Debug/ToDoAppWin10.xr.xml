@@ -19,7 +19,7 @@
     <RootPropertyPathName Name="Sender" />
     <RootPropertyPathName Name="Signature" />
     <RootPropertyPathName Name="CreatedAt" />
-    <RootPropertyPathName Name="Creator" />
+    <RootPropertyPathName Name="CreatedBy" />
     <RootPropertyPathName Name="UpdatedAt" />
     <RootPropertyPathName Name="LastEditor" />
     <RootPropertyPathName Name="AssignedTo" />

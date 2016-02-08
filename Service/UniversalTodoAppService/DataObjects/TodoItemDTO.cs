@@ -19,11 +19,13 @@ namespace UniversalTodoAppService.DataObjects
 
         public DateTimeOffset? FinishDate { get; set; }
 
-        //public UserInfo LastEditor { get; set; }
+        public EditorDTO LastEditor { get; set; }
         
         public TodoItemDTO Parent { get; set; }
 
-        //public UserInfo AssignedTo { get; set; }
+        public EditorDTO AssignedTo { get; set; }
+
+        public EditorDTO CreatedBy { get; set; }
 
         //public ICollection<TodoItemDTO> Todos { get; set; }
 
