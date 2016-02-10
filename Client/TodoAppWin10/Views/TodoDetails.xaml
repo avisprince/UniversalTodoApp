@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <AppBarButton Icon="Back" Width="50" Height="40" Click="HeaderBackButton_Click" Margin="0,0,0,0"/>
+                <AppBarButton Icon="Back" Width="50" Height="46" Click="HeaderBackButton_Click" />
             </Grid>
             <Grid Grid.Column="1">
                 <TextBlock Text="{Binding Path=CurrentTodo.Title}" VerticalAlignment="Center" FontSize="17" FontWeight="Bold" TextWrapping="WrapWholeWords" TextAlignment="Center" />
@@ -109,7 +109,7 @@
                                 <TextBox Name="AddTodoTextBox" VerticalAlignment="Center" PlaceholderText="Add new todo..." TextWrapping="Wrap" BorderBrush="Transparent" Style="{StaticResource TextBoxNoBackgroundOnFocus}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <AppBarButton Icon="Add" Width="50" Height="50" Click="AddTodo_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                <AppBarButton Icon="Add" Width="57" Height="48" Click="AddTodo_Click"
                                               Background="{Binding ElementName=AddTodoTextBox, Path=Text.Length, Converter={StaticResource TextLengthToButtonColorConverter}}" 
                                               IsEnabled="{Binding ElementName=AddTodoTextBox, Path=Text.Length, Converter={StaticResource TextLengthToIsEnabledConverter}}" />
                             </Grid>
@@ -120,7 +120,7 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <ScrollViewer VerticalScrollBarVisibility="Hidden">
@@ -184,23 +184,12 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </Grid>
-                        <Grid Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Gray">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="1">
-                                <AppBarButton Icon="Save" Click="DetailsTabSaveButton_Click" Name="DetailsTabSaveButton" IsEnabled="False" />
-                            </Grid>
-                            <Grid Grid.Column="2">
-                                <AppBarButton Icon="Cancel" Click="DetailsTabCancelButton_Click" Name="DetailsTabCancelButton" IsEnabled="False" />
-                            </Grid>
-                            <Grid Grid.Column="3">
-                                <AppBarButton Icon="Delete" Click="DetailsTabDeleteButton_Click" Name="DetailsTabDeleteButton" />
-                            </Grid>
+                        <Grid Grid.Row="1">
+                            <CommandBar>
+                                <AppBarButton Icon="Save" Label="Save" Click="DetailsTabSaveButton_Click" Name="DetailsTabSaveButton" IsEnabled="False" />
+                                <AppBarButton Icon="Cancel" Label="Cancel" Click="DetailsTabCancelButton_Click" Name="DetailsTabCancelButton" IsEnabled="False" />
+                                <AppBarButton Icon="Delete" Label="Delete" Click="DetailsTabDeleteButton_Click" Name="DetailsTabDeleteButton" />
+                            </CommandBar>
                         </Grid>
                     </Grid>
                 </PivotItem>
@@ -211,27 +200,48 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Margin="10,0">
-                            <ListView ItemsSource="{Binding Path=CurrentTodo.Messages}" ItemContainerStyle="{StaticResource ListViewNoHighlightsNoTilt}">
+                            <ListView Name="MessagesListView" ItemsSource="{Binding Path=CurrentTodo.Messages}" ItemContainerStyle="{StaticResource ListViewNoHighlightsNoTilt}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <StackPanel HorizontalAlignment="Left" Margin="0,0,60,10" Visibility="{Binding Sender, Converter={StaticResource MessageSenderToDisplayConverter}, ConverterParameter=false}">
-                                                <Polygon Points="0,0 0,10 15,10" Fill="{ThemeResource SystemAccentColor}" Margin="10,0,0,-1" />
-                                                <StackPanel Background="{ThemeResource SystemAccentColor}">
-                                                    <TextBlock Text="{Binding Text}" Margin="10" TextWrapping="WrapWholeWords"/>
-                                                    <TextBlock Text="{Binding Signature}" Margin="10,0,10,5" HorizontalAlignment="Right"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                            <StackPanel HorizontalAlignment="Right" Margin="60,10,0,0" Visibility="{Binding Sender, Converter={StaticResource MessageSenderToDisplayConverter}, ConverterParameter=true}">
-                                                <StackPanel BorderBrush="Transparent" BorderThickness="0">
-                                                    <StackPanel.Background>
-                                                        <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="0.45"/>
-                                                    </StackPanel.Background>
-                                                    <TextBlock Text="{Binding Text}" Margin="10" TextWrapping="WrapWholeWords"/>
-                                                    <TextBlock Text="{Binding Signature}" Margin="10,0,10,5" HorizontalAlignment="Right"/>
-                                                </StackPanel>
-                                                <Polygon Points="0,0 15,0 15,10" Width="20" HorizontalAlignment="Right" Fill="{ThemeResource SystemAccentColor}" Opacity="0.45" Margin="0,0,5,0" Stroke="Transparent" />
-                                            </StackPanel>
+                                            <Grid Visibility="{Binding Sender, Converter={StaticResource MessageSenderToDisplayConverter}, ConverterParameter=false}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width=".25*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0">
+                                                    <Image Source="{Binding Path=Sender.PictureUrl}" Width="50" Height="50" VerticalAlignment="Bottom" Margin="0,0,0,10"/>
+                                                </Grid>
+                                                <Grid Grid.Column="1">
+                                                    <StackPanel HorizontalAlignment="Left" Margin="10,0,0,10">
+                                                        <Polygon Points="0,0 0,10 15,10" Fill="{ThemeResource SystemAccentColor}" Margin="10,0,0,-1" />
+                                                        <StackPanel Background="{ThemeResource SystemAccentColor}">
+                                                            <TextBlock Text="{Binding Text}" Margin="10" TextWrapping="WrapWholeWords"/>
+                                                            <TextBlock Text="{Binding Signature}" Margin="10,0,10,5" />
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid Visibility="{Binding Sender, Converter={StaticResource MessageSenderToDisplayConverter}, ConverterParameter=true}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition Width=".25*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="2">
+                                                    <StackPanel HorizontalAlignment="Right" Margin="0,10,0,0">
+                                                        <StackPanel BorderBrush="Transparent" BorderThickness="0">
+                                                            <StackPanel.Background>
+                                                                <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="0.45"/>
+                                                            </StackPanel.Background>
+                                                            <TextBlock Text="{Binding Text}" Margin="10" TextWrapping="WrapWholeWords"/>
+                                                            <TextBlock Text="{Binding Signature}" Margin="10,0,10,5"/>
+                                                        </StackPanel>
+                                                        <Polygon Points="0,0 15,0 15,10" Width="20" HorizontalAlignment="Right" Fill="{ThemeResource SystemAccentColor}" Opacity="0.45" Margin="0,0,5,0" Stroke="Transparent" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -246,7 +256,7 @@
                                 <TextBox Name="SendMessageTextBox" VerticalAlignment="Center" PlaceholderText="Type a message" TextWrapping="Wrap" BorderBrush="Transparent" Style="{StaticResource TextBoxNoBackgroundOnFocus}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <AppBarButton Icon="Send" Width="50" Height="50" Click="SendMessage_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                <AppBarButton Icon="Send" Width="57" Height="48" Click="SendMessage_Click"
                                               Background="{Binding ElementName=SendMessageTextBox, Path=Text.Length, Converter={StaticResource TextLengthToButtonColorConverter}}" 
                                               IsEnabled="{Binding ElementName=SendMessageTextBox, Path=Text.Length, Converter={StaticResource TextLengthToIsEnabledConverter}}" />
                             </Grid>
@@ -264,15 +274,17 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10,5" Orientation="Horizontal">
-                                            <Image Source="{Binding PictureUrl}" Height="50" Width="50"/>
-                                            <TextBlock Text="{Binding UserName}" />
+                                            <Image Source="{Binding PictureUrl}" Height="50" Width="50" />
+                                            <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="17" Margin="10,0" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                         </Grid>
-                        <Grid Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Gray">
-                            <AppBarButton Icon="Add" Click="AddUser_Click" Width="50" Height="50" HorizontalAlignment="Center" />
+                        <Grid Grid.Row="1">
+                            <CommandBar>
+                                <AppBarButton Icon="Add" Label="Add Editor" Click="AddUser_Click" />
+                            </CommandBar>
                         </Grid>
                     </Grid>
                 </PivotItem>

@@ -9,10 +9,10 @@ namespace UniversalTodoAppService.Controllers
     {
         public static async Task<string> GetFacebookAccessToken(ServiceUser user)
         {
-            return "CAAGztpWeEdMBAOZAwXo32eH2sNmc97gKaiX6UENcwORH99bP4QgjhREU6H0ZAFyt9D6aPyTnhgw9b1QdN2q3rlmeCESPqqNoHxFYGyREsJRIoRTyQxG8IRH2aXPoD3OxPZAsp2MNyldQvxPVTKQ1D21fPvt6ZBwVO0ZAx4nFrWQybvH1UvFpWc1Jkle436FfdqGdJIpZCxRwZDZD";
+            //return "CAACEdEose0cBAOIivZApQn02AGbqnFZCYNAn4CwASATSfS48sgFN6A3LNW8R9wQp8FxCjpr6U6tntkva5Bsu23QgQI4vc0JSOp1vYKm7rLoDZB5iZAezIZBWhz38zSZBkwASN7NpfLcvy6uzqRcIkZAZBxvzyeIKhisQtqZAwZCRIkf33Kcb8kGV2S4Alsf1FyPi0AAZBlqPigEnYHk4ZBp93z8g";
 
-            //var fb = (await user.GetIdentitiesAsync()).OfType<FacebookCredentials>().FirstOrDefault();
-            //return fb.AccessToken;
+            var fb = (await user.GetIdentitiesAsync()).OfType<FacebookCredentials>().FirstOrDefault();
+            return fb.AccessToken;
         }
 
         public static string GetCurrentUserFacebookId(ServiceUser user, string fbAccessToken)

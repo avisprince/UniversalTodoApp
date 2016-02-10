@@ -24,8 +24,26 @@ namespace ToDoAppWin10.Models
         {
             get
             {
-                return CurrentUser.Instance.UserName + ": " + this.CreatedAt.DateTime.ToString();
+                //return this.CreatedAt.DateTime.ToString();
+                return this.GetFormattedDate();
             }
+        }
+
+        private string GetFormattedDate()
+        {
+            var messageDate = this.CreatedAt.Date;
+
+            // if < same day
+
+            // if same week
+            var weekday = this.CreatedAt.DayOfWeek;
+            var local = this.CreatedAt.LocalDateTime;
+            return "";
+
+            // if same year
+
+            // else
+            //return 
         }
     }
 }

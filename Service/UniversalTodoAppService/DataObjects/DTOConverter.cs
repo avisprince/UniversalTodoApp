@@ -47,8 +47,9 @@ namespace UniversalTodoAppService.DataObjects
             {
                 Id = message.Id,
                 Text = message.Text,
-                TodoItemId = message.TodoItemId,
                 CreatedAt = message.CreatedAt,
+                TodoItemId = message.TodoItemId,
+                Sender = ConvertToDTO(message.Sender, fbAccessToken)
             };
         }
 
@@ -85,8 +86,9 @@ namespace UniversalTodoAppService.DataObjects
             {
                 Id = messageDto.Id,
                 Text = messageDto.Text,
-                TodoItemId = messageDto.TodoItemId,
                 CreatedAt = messageDto.CreatedAt,
+                TodoItemId = messageDto.TodoItemId,
+                SenderId = messageDto.Sender.Id,
             };
         }
     }

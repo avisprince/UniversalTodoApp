@@ -265,11 +265,11 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Background" />
       <RootProperty Name="IsEnabled" />
+      <RootProperty Name="Flyout" />
       <RootProperty Name="Label" />
       <RootProperty Name="Name" />
       <RootProperty Name="Tag" />
       <RootProperty Name="Foreground" />
-      <RootProperty Name="Margin" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
@@ -289,20 +289,6 @@
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Orientation" />
-      <RootProperty Name="Children" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="Padding" />
-      <RootProperty Name="Tag" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Visibility" />
-      <RootEvent Name="Tapped" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
       <RootProperty Name="MinWidth" />
       <RootProperty Name="Name" />
@@ -311,6 +297,14 @@
       <RootProperty Name="Margin" />
       <RootEvent Name="Checked" />
       <RootEvent Name="Unchecked" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyout">
+      <RootProperty Name="Placement" />
+      <RootProperty Name="Items" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
+      <RootProperty Name="Text" />
+      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Source" />
@@ -328,6 +322,20 @@
     <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
       <RootProperty Name="Margin" />
       <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="Width" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="Tag" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Visibility" />
+      <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Polygon">
       <RootProperty Name="Points" />
@@ -364,6 +372,9 @@
     <RootType FullName="ToDoAppWin10.Views.ToDoItemDetails" />
     <RootType FullName="ToDoAppWin10.Utilities.Converters.CheckBoxToVisibilityConverter" />
     <RootType FullName="ToDoAppWin10.Utilities.Converters.MessageSenderToDisplayConverter" />
+    <RootType FullName="Windows.UI.Xaml.Controls.CommandBar">
+      <RootProperty Name="PrimaryCommands" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TimePicker">
       <RootProperty Name="Name" />
       <RootProperty Name="AllowDrop" />

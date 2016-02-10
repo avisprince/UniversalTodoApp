@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <AppBarButton x:ConnectionId='24' Icon="Back" Width="50" Height="40"                                Margin="0,0,0,0"/>
+                <AppBarButton x:ConnectionId='24' Icon="Back" Width="50" Height="46"                                />
             </Grid>
             <Grid Grid.Column="1">
                 <TextBlock Text="{Binding Path=CurrentTodo.Title}" VerticalAlignment="Center" FontSize="17" FontWeight="Bold" TextWrapping="WrapWholeWords" TextAlignment="Center" />
@@ -109,7 +109,7 @@
                                 <TextBox x:ConnectionId='17' Name="AddTodoTextBox" VerticalAlignment="Center" PlaceholderText="Add new todo..." TextWrapping="Wrap" BorderBrush="Transparent" Style="{StaticResource TextBoxNoBackgroundOnFocus}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <AppBarButton x:ConnectionId='16' Icon="Add" Width="50" Height="50"                       HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                <AppBarButton x:ConnectionId='16' Icon="Add" Width="57" Height="48"                      
                                               Background="{Binding ElementName=AddTodoTextBox, Path=Text.Length, Converter={StaticResource TextLengthToButtonColorConverter}}" 
                                               IsEnabled="{Binding ElementName=AddTodoTextBox, Path=Text.Length, Converter={StaticResource TextLengthToIsEnabledConverter}}" />
                             </Grid>
@@ -120,7 +120,7 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <ScrollViewer VerticalScrollBarVisibility="Hidden">
@@ -184,23 +184,12 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </Grid>
-                        <Grid Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Gray">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="1">
-                                <AppBarButton x:ConnectionId='9' Icon="Save"                                    Name="DetailsTabSaveButton" IsEnabled="False" />
-                            </Grid>
-                            <Grid Grid.Column="2">
-                                <AppBarButton x:ConnectionId='8' Icon="Cancel"                                      Name="DetailsTabCancelButton" IsEnabled="False" />
-                            </Grid>
-                            <Grid Grid.Column="3">
-                                <AppBarButton x:ConnectionId='7' Icon="Delete"                                      Name="DetailsTabDeleteButton" />
-                            </Grid>
+                        <Grid Grid.Row="1">
+                            <CommandBar>
+                                <AppBarButton x:ConnectionId='7' Icon="Save" Label="Save"                                    Name="DetailsTabSaveButton" IsEnabled="False" />
+                                <AppBarButton x:ConnectionId='8' Icon="Cancel" Label="Cancel"                                      Name="DetailsTabCancelButton" IsEnabled="False" />
+                                <AppBarButton x:ConnectionId='9' Icon="Delete" Label="Delete"                                      Name="DetailsTabDeleteButton" />
+                            </CommandBar>
                         </Grid>
                     </Grid>
                 </PivotItem>
@@ -246,7 +235,7 @@
                                 <TextBox x:ConnectionId='6' Name="SendMessageTextBox" VerticalAlignment="Center" PlaceholderText="Type a message" TextWrapping="Wrap" BorderBrush="Transparent" Style="{StaticResource TextBoxNoBackgroundOnFocus}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <AppBarButton x:ConnectionId='5' Icon="Send" Width="50" Height="50"                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                <AppBarButton x:ConnectionId='5' Icon="Send" Width="57" Height="48"                          
                                               Background="{Binding ElementName=SendMessageTextBox, Path=Text.Length, Converter={StaticResource TextLengthToButtonColorConverter}}" 
                                               IsEnabled="{Binding ElementName=SendMessageTextBox, Path=Text.Length, Converter={StaticResource TextLengthToIsEnabledConverter}}" />
                             </Grid>
@@ -264,15 +253,17 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10,5" Orientation="Horizontal">
-                                            <Image Source="{Binding PictureUrl}" Height="50" Width="50"/>
-                                            <TextBlock Text="{Binding UserName}" />
+                                            <Image Source="{Binding PictureUrl}" Height="50" Width="50" />
+                                            <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="17" Margin="10,0" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                         </Grid>
-                        <Grid Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Gray">
-                            <AppBarButton x:ConnectionId='4' Icon="Add"                       Width="50" Height="50" HorizontalAlignment="Center" />
+                        <Grid Grid.Row="1">
+                            <CommandBar>
+                                <AppBarButton x:ConnectionId='4' Icon="Add" Label="Add Editor"                       />
+                            </CommandBar>
                         </Grid>
                     </Grid>
                 </PivotItem>

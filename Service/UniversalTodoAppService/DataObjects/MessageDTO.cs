@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace UniversalTodoAppService.DataObjects
 {
@@ -14,5 +11,7 @@ namespace UniversalTodoAppService.DataObjects
         public DateTimeOffset? CreatedAt { get; set; }
 
         public string TodoItemId { get; set; }
+
+        public EditorDTO Sender { get; set; }
     }
 }

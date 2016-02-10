@@ -13,19 +13,25 @@ namespace ToDoAppWin10.Views
     /// </summary>
     public sealed partial class App : Application
     {
-        public static MobileServiceClient MobileService = new MobileServiceClient("http://localhost:51293")
+        //public static MobileServiceClient MobileService = new MobileServiceClient("http://localhost:51293")
+        //{
+        //    SerializerSettings = new MobileServiceJsonSerializerSettings()
+        //    {
+        //        CamelCasePropertyNames = true,
+        //    }
+        //};
+
+        // Use this constructor instead after publishing to the cloud
+        public static MobileServiceClient MobileService = new MobileServiceClient(
+            "https://universaltodoapp.azure-mobile.net/",
+            "gPtXbREslHnMSvOjGKerpbCPyrhHyc48"
+        )
         {
             SerializerSettings = new MobileServiceJsonSerializerSettings()
             {
                 CamelCasePropertyNames = true,
             }
         };
-
-        //// Use this constructor instead after publishing to the cloud
-        //public static MobileServiceClient MobileService = new MobileServiceClient(
-        //    "https://universaltodoapp.azure-mobile.net/",
-        //    "gPtXbREslHnMSvOjGKerpbCPyrhHyc48"
-        //);
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

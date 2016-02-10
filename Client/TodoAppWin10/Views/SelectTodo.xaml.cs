@@ -1,11 +1,9 @@
-﻿using System;
-using ToDoAppWin10.Models;
+﻿using ToDoAppWin10.Models;
 using ToDoAppWin10.Utilities;
 using ToDoAppWin10.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Navigation;
 
 namespace ToDoAppWin10.Views
 {
@@ -42,7 +40,6 @@ namespace ToDoAppWin10.Views
         private void SignoutButton_Click(object sender, RoutedEventArgs e)
         {
             AuthenticationHelper.Logout();
-
             Frame.Navigate(typeof(Login));
         }
     }

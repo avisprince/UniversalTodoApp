@@ -31,17 +31,31 @@
                 <TextBlock Text="{Binding Path=CurrUser.UserName}" VerticalAlignment="Center" FontSize="17" FontWeight="Bold" TextWrapping="WrapWholeWords" />
             </Grid>
             <Grid Grid.Column="2">
-                <AppBarButton Icon="Contact" Width="50" Height="50" Click="SignoutButton_Click"/>
+                <AppBarButton Icon="Contact" Width="50" Height="50">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Text="Sign Out" Click="SignoutButton_Click" />
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" Margin="10,0">
+        <Grid Grid.Row="1">
             <ListView ItemsSource="{Binding Todos}" ItemContainerStyle="{StaticResource ListViewNoHighlights}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox MinWidth="20" />
-                            <TextBlock Text="{Binding Title}" Tag="{Binding}" VerticalAlignment="Center" Tapped="Todo_Tapped" />
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <CheckBox MinWidth="20" />
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="{Binding Title}" Tag="{Binding}" VerticalAlignment="Center" Tapped="Todo_Tapped" />
+                            </Grid>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

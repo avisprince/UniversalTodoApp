@@ -204,7 +204,12 @@ namespace ToDoAppWin10.Views
         {
             var newMessage = new Message(this.SendMessageTextBox.Text, this.todoDetails.CurrentTodo.Id);
             this.todoDetails.CurrentTodo.Messages.Add(newMessage);
+
+            // Empty the text box
             this.SendMessageTextBox.Text = string.Empty;
+
+            // Scroll to the bottom of the messages
+            this.MessagesListView.ScrollIntoView(this.MessagesListView.Items.Count - 1);
 
             await App.MobileService.GetTable<Message>().InsertAsync(newMessage);
         }

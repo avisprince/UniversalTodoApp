@@ -9,22 +9,22 @@ namespace ToDoAppWin10.Utilities.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return Visibility.Visible;
-            //var displayIfCurrentUser = System.Convert.ToBoolean(parameter);
-            //var sender = value as User;
+            //return Visibility.Visible;
+            var displayIfCurrentUser = System.Convert.ToBoolean(parameter);
+            var sender = value as Editor;
 
-            //if (displayIfCurrentUser)
-            //{
-            //    return sender.UserId == CurrentUser.Instance.UserId
-            //            ? Visibility.Visible
-            //            : Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    return sender.UserId != CurrentUser.Instance.UserId
-            //            ? Visibility.Visible
-            //            : Visibility.Collapsed;
-            //}
+            if (displayIfCurrentUser)
+            {
+                return sender.Id == CurrentUser.Instance.Id
+                        ? Visibility.Visible
+                        : Visibility.Collapsed;
+            }
+            else
+            {
+                return sender.Id != CurrentUser.Instance.Id
+                        ? Visibility.Visible
+                        : Visibility.Collapsed;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
